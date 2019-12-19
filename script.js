@@ -1,21 +1,27 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-  document.addEventListener('keydown', (e)=>{
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    if(!audio) return;//to stop the program from running
-    audio.currentTime = 0;//to make sound replay everytime keydown e. is fired
+const animatedKeys = document.querySelectorAll(`.key`);
+
+function playSound(e) {
+    let audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    let keyButton = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    if (!audio) return;
+
+    audio.currentTime = 0;
     audio.play();
-    key.classList.add('playing');
-    //use transition end event to remove class
+    keyButton.classList.add("playing");
+}
 
-      function removeTransition(e){//removing css properties
-        if(e.propertyName !== 'transform')return;
-        this.classList.remove('playing');
-    };
+/**
+ * Normalizes css properties
+ * @param {Event} e 
+ */
+function onTransformEnd(e) {
+    if (e.propertyName !== "transform") return;
+    this.classList.remove("playing");
+}
 
-    const keyboard = document.querySelectorAll('.key');
-    keyboard.forEach(key => key.addEventListener('transitionend',removeTransition));//have to loop over each item in array, cannot use addEventListener.
-    console.log(key);
-  });
+animatedKeys.forEach(animatedKey => 
+    animatedKey.addEventListener("transitionend", onTransformEnd)
+);
 
-});//end content loaded
+window.addEventListener("keydown", playSound);
