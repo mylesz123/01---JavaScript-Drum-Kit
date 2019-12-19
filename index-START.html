@@ -7,7 +7,6 @@
 </head>
 <body>
 
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -49,31 +48,6 @@
   <audio data-key="76" src="sounds/ElectricGuitar.wav"></audio>
 
 <script src='script.js'></script>
-
-<!-- <script>
-  const animatedKeys = document.querySelectorAll(`.key`);
-
-  function playSound (e) {
-    let audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    let key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-
-    if (!audio) return;
-
-    audio.currentTime = 0;
-    audio.play();
-    key.classList.add("playing");
-  }
-   
-  function onTransformEnd (e) {
-    if (e.propertyName !== "transform") return;
-    this.classList.remove("playing");
-  }
-
-  animatedKeys.forEach(key => key.addEventListener("transitionend", onTransformEnd));
-
-  window.addEventListener("keydown", playSound);
-</script> -->
-
 
 </body>
 </html>
